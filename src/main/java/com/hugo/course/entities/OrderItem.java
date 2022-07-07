@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.hugo.course.entities.pk.OrderItemPK;
 
+@JsonPropertyOrder({"quantity", "price", "subTotal", "product"})
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable{
@@ -63,6 +65,10 @@ public class OrderItem implements Serializable{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getSubTotal(){
+        return price * quantity;
     }
 
     @Override
