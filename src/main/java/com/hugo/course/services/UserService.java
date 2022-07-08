@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hugo.course.repositories.UserRepository;
+import com.hugo.course.services.exceptions.ResourceNotFoundException;
 import com.hugo.course.entities.User;
 
 @Service
@@ -21,7 +22,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User user){
